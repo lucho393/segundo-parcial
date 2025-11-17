@@ -99,8 +99,6 @@ pokemons = [
         "gigamax": True
     },
 
-    # ⭐ AGREGADOS PARA QUE LA CONSIGNA FUNCIONE ⭐
-
     {
         "name": "DummyMon1",
         "number": 9001,
@@ -138,3 +136,4 @@ pokemons = [
     },
 
 ]
+
