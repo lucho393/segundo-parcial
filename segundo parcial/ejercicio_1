@@ -50,20 +50,21 @@ def listado_por_niveles():
     print("\n=== LISTADO POR NIVELES ===")
     arbol_nombre.by_level()
 
-def debiles_a(lista_objetivo):
-    print("\n=== POKÉMONS DÉBILES A:", lista_objetivo, "===")
+def debiles_a(lista_nombres):
+    print("\n=== POKÉMONS DÉBILES A:", lista_nombres, "===")
+    tipos_objetivo = set()
 
-    def __rec(root):
-        if root is not None:
-            __rec(root.left)
-            debilidades = root.other_values["weakness"]
-            for enemigo in lista_objetivo:
-                if enemigo in debilidades:
-                    print(root.other_values["name"])
-                    break
-            __rec(root.right)
+    for root in pokemons: 
+        if root["name"] in lista_nombres:
+            for t in root["types"]:
+                tipos_objetivo.add(t)
+                
+    for p in pokemons:
+        for tipo in tipos_objetivo:
+            if tipo in p["weakness"]:
+                print(p["name"])
+                break
 
-    __rec(arbol_nombre.root)
 
 def tipos_y_cantidades():
     print("\n=== CANTIDAD DE POKÉMONS POR TIPO ===")
