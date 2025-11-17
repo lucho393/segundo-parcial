@@ -98,42 +98,6 @@ pokemons = [
         "mega": False,
         "gigamax": True
     },
-
-    {
-        "name": "DummyMon1",
-        "number": 9001,
-        "types": ["normal"],
-        "weakness": ["Jolteon"],
-        "mega": False,
-        "gigamax": False
-    },
-
-    {
-        "name": "DummyMon2",
-        "number": 9002,
-        "types": ["normal"],
-        "weakness": ["Lycanroc"],
-        "mega": False,
-        "gigamax": False
-    },
-
-    {
-        "name": "DummyMon3",
-        "number": 9003,
-        "types": ["normal"],
-        "weakness": ["Tyrantrum"],
-        "mega": False,
-        "gigamax": False
-    },
-
-    {
-        "name": "DummyMon4",
-        "number": 9004,
-        "types": ["normal"],
-        "weakness": ["Jolteon", "Lycanroc", "Tyrantrum"],
-        "mega": False,
-        "gigamax": False
-    },
-
 ]
+
 
