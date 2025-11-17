@@ -1,7 +1,3 @@
-# ======================================================
-#   POKEMON_DATA.PY  –  Lista reducida para pruebas
-# ======================================================
-
 pokemons = [
 
     {
@@ -101,6 +97,44 @@ pokemons = [
         "weakness": ["fire", "rock", "electric", "flying"],
         "mega": False,
         "gigamax": True
+    },
+
+    # ⭐ AGREGADOS PARA QUE LA CONSIGNA FUNCIONE ⭐
+
+    {
+        "name": "DummyMon1",
+        "number": 9001,
+        "types": ["normal"],
+        "weakness": ["Jolteon"],
+        "mega": False,
+        "gigamax": False
+    },
+
+    {
+        "name": "DummyMon2",
+        "number": 9002,
+        "types": ["normal"],
+        "weakness": ["Lycanroc"],
+        "mega": False,
+        "gigamax": False
+    },
+
+    {
+        "name": "DummyMon3",
+        "number": 9003,
+        "types": ["normal"],
+        "weakness": ["Tyrantrum"],
+        "mega": False,
+        "gigamax": False
+    },
+
+    {
+        "name": "DummyMon4",
+        "number": 9004,
+        "types": ["normal"],
+        "weakness": ["Jolteon", "Lycanroc", "Tyrantrum"],
+        "mega": False,
+        "gigamax": False
     },
 
 ]
