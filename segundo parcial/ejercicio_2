@@ -1,0 +1,116 @@
+from graph import Graph
+
+g = Graph(is_directed=False)
+
+personajes = [
+    "Luke Skywalker",
+    "Darth Vader",
+    "Yoda",
+    "Boba Fett",
+    "C-3PO",
+    "Leia",
+    "Rey",
+    "Kylo Ren",
+    "Chewbacca",
+    "Han Solo",
+    "R2-D2",
+    "BB-8"
+]
+
+for p in personajes:
+    g.insert_vertex(p)
+
+relaciones = [
+    ("Luke Skywalker", "Leia", 9),
+    ("Luke Skywalker", "Darth Vader", 6),
+    ("Luke Skywalker", "Han Solo", 7),
+    ("Luke Skywalker", "Yoda", 4),
+    ("Luke Skywalker", "Chewbacca", 6),
+
+    ("Leia", "Han Solo", 7),
+    ("Leia", "Chewbacca", 6),
+    ("Leia", "C-3PO", 9),
+
+    ("Darth Vader", "Yoda", 2),
+    ("Darth Vader", "Kylo Ren", 1),
+
+    ("C-3PO", "R2-D2", 9),
+    ("C-3PO", "BB-8", 3),
+
+    ("R2-D2", "BB-8", 2),
+
+    ("Rey", "Kylo Ren", 5),
+    ("Rey", "BB-8", 3),
+
+    ("Boba Fett", "Darth Vader", 3),
+]
+
+for a, b, w in relaciones:
+    g.insert_edge(a, b, w)
+
+def aem_desde(personaje):
+    print(f"\n===== ÁRBOL DE EXPANSIÓN MÍNIMA DESDE {personaje} =====")
+    aem = g.kruskal(personaje)
+    print(aem)
+
+    total = 0
+    for arista in aem.split(";"):
+        partes = arista.split("-")
+        if len(partes) == 3:
+            ori, des, peso = partes
+            total += int(peso)
+
+
+aem_desde("C-3PO")
+aem_desde("Yoda")
+aem_desde("Leia")
+
+print("\n===== PARES CON MÁXIMO NÚMERO DE EPISODIOS =====")
+
+max_peso = 0
+pares = []
+
+for v in g:
+    for edge in v.edges:
+        if edge.weight > max_peso:
+            max_peso = edge.weight
+            pares = [(v.value, edge.value)]
+        elif edge.weight == max_peso:
+            pares.append((v.value, edge.value))
+
+print(f"Máximo número de episodios compartidos: {max_peso}")
+for p in pares:
+    print(f"{p[0]} - {p[1]}")
+
+def camino_mas_corto(origen, destino):
+    print(f"\n===== CAMINO MÁS CORTO ENTRE {origen} Y {destino} =====")
+
+    path = g.dijkstra(origen)
+    recorrido = []
+    costo = None
+    actual = destino
+
+    while path.size() > 0:
+        nodo = path.pop()
+        if nodo[0] == actual:
+            if costo is None:
+                costo = nodo[1]
+            recorrido.append(nodo[0])
+            actual = nodo[2]
+
+    recorrido.reverse()
+    print(f"Camino: {' -> '.join(recorrido)} (costo {costo})")
+
+camino_mas_corto("C-3PO", "R2-D2")
+camino_mas_corto("Yoda", "Darth Vader")
+
+print("\n===== PERSONAJES QUE APARECEN EN LOS 9 EPISODIOS =====")
+
+def aparecen_en_nueve():
+    for v in g:
+        for edge in v.edges:
+            if edge.weight == 9:
+                print(v.value)
+                break
+
+aparecen_en_nueve()

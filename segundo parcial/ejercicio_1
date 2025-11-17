@@ -1,0 +1,131 @@
+from arbol import BinaryTree      
+from  pokemon_data import pokemons   
+
+arbol_nombre = BinaryTree()   
+arbol_numero = BinaryTree()    
+arbol_tipo = BinaryTree()  
+
+for p in pokemons:
+    nombre = p["name"]
+    numero = p["number"]
+    tipo_principal = p["types"][0]  
+
+    arbol_nombre.insert(nombre, p)
+    arbol_numero.insert(numero, p)
+    arbol_tipo.insert(tipo_principal, p)
+
+def mostrar_por_numero(num):
+    print(f"\n=== BÚSQUEDA POR NÚMERO: {num} ===")
+    pos = arbol_numero.search(num)
+    if pos is not None:
+        print(pos.value, pos.other_values)
+    else:
+        print("No existe un Pokémon con ese número.")
+
+def mostrar_por_nombre_proximidad(texto):
+    print(f"\n=== BÚSQUEDA POR PROXIMIDAD: '{texto}' ===")
+    arbol_nombre.proximity_search(texto)
+
+def pokemons_por_tipo(tipo):
+    print(f"\n=== POKÉMONS DE TIPO {tipo.upper()} ===")
+
+    def __rec(root):
+        if root is not None:
+            __rec(root.left)
+            if tipo in root.other_values["types"]:
+                print(root.other_values["name"])
+            __rec(root.right)
+
+    __rec(arbol_nombre.root)
+
+def listado_por_numero():
+    print("\n=== LISTADO ASCENDENTE POR NÚMERO ===")
+    arbol_numero.in_order()
+
+def listado_por_nombre():
+    print("\n=== LISTADO ASCENDENTE POR NOMBRE ===")
+    arbol_nombre.in_order()
+
+def listado_por_niveles():
+    print("\n=== LISTADO POR NIVELES ===")
+    arbol_nombre.by_level()
+
+def debiles_a(lista_objetivo):
+    print("\n=== POKÉMONS DÉBILES A:", lista_objetivo, "===")
+
+    def __rec(root):
+        if root is not None:
+            __rec(root.left)
+            debilidades = root.other_values["weakness"]
+            for enemigo in lista_objetivo:
+                if enemigo in debilidades:
+                    print(root.other_values["name"])
+                    break
+            __rec(root.right)
+
+    __rec(arbol_nombre.root)
+
+def tipos_y_cantidades():
+    print("\n=== CANTIDAD DE POKÉMONS POR TIPO ===")
+    conteo = {}
+
+    def __rec(root):
+        if root is not None:
+            __rec(root.left)
+            for t in root.other_values["types"]:
+                conteo[t] = conteo.get(t, 0) + 1
+            __rec(root.right)
+
+    __rec(arbol_nombre.root)
+
+    for tipo, cant in conteo.items():
+        print(f"{tipo}: {cant}")
+
+def contar_mega():
+    total = 0
+
+    def __rec(root):
+        nonlocal total
+        if root is not None:
+            __rec(root.left)
+            if root.other_values["mega"] is True:
+                total += 1
+            __rec(root.right)
+
+    __rec(arbol_nombre.root)
+    print("\n=== TOTAL DE POKÉMONS CON MEGA EVOLUCIÓN ===")
+    print(total)
+
+def contar_gigamax():
+    total = 0
+
+    def __rec(root):
+        nonlocal total
+        if root is not None:
+            __rec(root.left)
+            if root.other_values["gigamax"] is True:
+                total += 1
+            __rec(root.right)
+
+    __rec(arbol_nombre.root)
+    print("\n=== TOTAL DE POKÉMONS CON FORMA GIGAMAX ===")
+    print(total)
+
+mostrar_por_numero(25)
+mostrar_por_nombre_proximidad("bul")
+
+pokemons_por_tipo("ghost")
+pokemons_por_tipo("fire")
+pokemons_por_tipo("steel")
+pokemons_por_tipo("electric")
+
+listado_por_numero()
+listado_por_nombre()
+listado_por_niveles()
+
+debiles_a(["Jolteon", "Lycanroc", "Tyrantrum"])
+
+tipos_y_cantidades()
+
+contar_mega()
+contar_gigamax()
