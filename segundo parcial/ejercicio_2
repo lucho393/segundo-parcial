@@ -7,14 +7,14 @@ personajes = [
     "Darth Vader",
     "Yoda",
     "Boba Fett",
-    "C-3PO",
+    "C_3PO",
     "Leia",
     "Rey",
     "Kylo Ren",
     "Chewbacca",
     "Han Solo",
-    "R2-D2",
-    "BB-8"
+    "R2_D2",
+    "BB_8"
 ]
 
 for p in personajes:
@@ -29,18 +29,18 @@ relaciones = [
 
     ("Leia", "Han Solo", 7),
     ("Leia", "Chewbacca", 6),
-    ("Leia", "C-3PO", 9),
+    ("Leia", "C_3PO", 9),
 
     ("Darth Vader", "Yoda", 2),
     ("Darth Vader", "Kylo Ren", 1),
 
-    ("C-3PO", "R2-D2", 9),
-    ("C-3PO", "BB-8", 3),
+    ("C_3PO", "R2_D2", 9),
+    ("C_3PO", "BB_8", 3),
 
-    ("R2-D2", "BB-8", 2),
+    ("R2_D2", "BB_8", 2),
 
     ("Rey", "Kylo Ren", 5),
-    ("Rey", "BB-8", 3),
+    ("Rey", "BB_8", 3),
 
     ("Boba Fett", "Darth Vader", 3),
 ]
@@ -55,13 +55,11 @@ def aem_desde(personaje):
 
     total = 0
     for arista in aem.split(";"):
-        partes = arista.split("-")
-        if len(partes) == 3:
-            ori, des, peso = partes
-            total += int(peso)
+        ori, des, peso = arista.split("-")
+        total += int(peso)
 
 
-aem_desde("C-3PO")
+aem_desde("C_3PO")
 aem_desde("Yoda")
 aem_desde("Leia")
 
@@ -101,7 +99,7 @@ def camino_mas_corto(origen, destino):
     recorrido.reverse()
     print(f"Camino: {' -> '.join(recorrido)} (costo {costo})")
 
-camino_mas_corto("C-3PO", "R2-D2")
+camino_mas_corto("C_3PO", "R2_D2")
 camino_mas_corto("Yoda", "Darth Vader")
 
 print("\n===== PERSONAJES QUE APARECEN EN LOS 9 EPISODIOS =====")
